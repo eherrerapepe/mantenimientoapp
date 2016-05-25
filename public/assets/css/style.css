@@ -1,0 +1,121 @@
+body{
+    background: url("../img/background.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.cnt-nav{
+    margin-top: 30% !important;
+}
+.center-img {
+    display: flex;
+    justify-content: center;
+}
+.center-img img {
+    height: 50px;
+    width: 50px;
+    border: 3px solid white;
+}
+.white-color{
+    color: white;
+}
+.cnt-name-welcome p{
+    margin: 0px !important;
+    padding: 0px !important;
+    margin-bottom: -8px !important;
+}
+.cnt-nav-index{
+    margin: 40px 0px;
+}
+
+.cnt-nav-index i{
+    margin-right: 10px;
+    font-size: 1.3em;
+    color: white;
+
+}
+
+.cnt-nav-index a{
+    color: white;
+    text-decoration: none;
+}
+.cnt-auto{
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.img-auto{
+    width: 260%;
+}
+
+.cnt-return-nav{
+    padding: 3% 0%;
+    background-color: #263238;
+    color: white;
+}
+
+.btn-plus{
+    height: 50px;
+    width: 50px;
+    padding: 10px !important;
+    color: white;
+    background-color: #ff6f00;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 18px -4px rgba(0,0,0,0.75);
+}
+
+.cnt-form-register-new-car{
+    color: white;
+    padding: 10% 5%;
+    background-color: rgba(0,0,0,0.5);
+}
+.help-block{
+    color: whitesmoke;
+}
+
+.required{
+    color: red;
+}
+.cnt-file{
+    position: relative;
+    padding: 5px 0px;
+    width: 150px;
+    background-color: #2499e3;
+    border-radius: 5px;
+    box-shadow: 0px 3px 0px #1a71a9;
+}
+#texto-file{
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+#photo_car{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.cnt-file:hover{
+    margin-top: 1px;
+    box-shadow: 0px 2px 0px #1a71a9;
+}
+
+.cnt-search{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.date-text-history{
+    color: #1a71a9;
+    padding-top: 3px;
+    font-size: 1.2em;
+}
