@@ -459,7 +459,7 @@
       <workItem from="1464188175696" duration="8000" />
       <workItem from="1464188817410" duration="7321000" />
       <workItem from="1464206012468" duration="8260000" />
-      <workItem from="1464214564929" duration="6160000" />
+      <workItem from="1464214564929" duration="6189000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Creacion de las interfaces&quot;">
       <created>1464219749201</created>
@@ -468,11 +468,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464219749201</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="&quot;Ajustes de la base de datos&quot;">
+      <created>1464222077862</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1464222077862</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21749000" />
+    <option name="totallyTimeSpent" value="21778000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
@@ -512,7 +519,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;Creacion de las interfaces&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Creacion de las interfaces&quot;" />
+    <MESSAGE value="&quot;Ajustes de la base de datos&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Ajustes de la base de datos&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

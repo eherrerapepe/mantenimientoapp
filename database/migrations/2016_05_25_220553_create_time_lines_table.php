@@ -15,8 +15,8 @@ class CreateTimeLinesTable extends Migration
         Schema::create('time_lines', function (Blueprint $table) {
             $table->increments('id');
             $table->date('dateChange')->unique();
-            $table->integer('user_profile_id')->unsigned();
-            $table->foreign('user_profile_id')->references('id')->on('user_profiles');
+            $table->integer('car_id')->unsigned();
+            $table->foreign('car_id')->references('id')->on('cars');
             $table->timestamps();
         });
     }
