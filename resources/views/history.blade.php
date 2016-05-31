@@ -1,49 +1,29 @@
 @extends('layout/master')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid" ng-controller="timeLineCtrl">
         <div class="row">
             @include('partials/redirectHomeUser')
             @include('partials/formSearchCar')
             <div class="col-xs-12">
-                <div class="list-group">
-                    <div class="list-group-item disabled text-center">
-                        Cambios de Aceite
-                    </div>
+                @if($flag != 0)
+                    <div class="list-group">
+                        <div class="list-group-item disabled text-center">
+                            Historial de Mantenimiento
+                        </div>
 
-                    <div class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <i class="fa fa-car fa-2x" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-xs-10">
-                                <p class="date-text-history">20 de junio del 2019</p>
+                        <div class="list-group-item" ng-class="{'list-group-item-success': car.state == 1}" ng-repeat="car in listCar">
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <i class="fa fa-car fa-2x" aria-hidden="true"></i><br><span class="date-text-history">@{{ car.dateChange }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <i class="fa fa-car fa-2x" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-xs-10">
-                                <p class="date-text-history">20 de junio del 2019</p>
-                            </div>
-                        </div>
                     </div>
-                    <div class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2">
-                                <i class="fa fa-car fa-2x" aria-hidden="true"></i>
-                            </div>
-                            <div class="col-xs-10">
-                                <p class="date-text-history">20 de junio del 2019</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                @else
+                    <h4 class="text-center white-color">Automovil no registrado</h4>
+                @endif
             </div>
         </div>
     </div>

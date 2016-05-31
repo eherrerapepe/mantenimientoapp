@@ -16,8 +16,8 @@
                         <input type="text" class="form-control" id="km_actual" name="km_actual">
                     </div>
                     <div class="form-group">
-                        <label for="approximate_travel"><span class="required">*</span> Km Diario:</label>
-                        <input type="text" class="form-control" id="approximate_travel" name="approximate_travel">
+                        <label for="approximate_travel_day"><span class="required">*</span> Km Diario:</label>
+                        <input type="text" class="form-control" id="approximate_travel_day" name="approximate_travel_day">
                         <small class="help-block">Km que recorre aproximadamente</small>
                     </div>
                     <div class="form-group">

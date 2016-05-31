@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class TimeLine extends Model
 {
     protected $table = 'time_lines';
-    protected $fillable = ['user_profile_id','dataChange'];
+    protected $fillable = ['car_id','dateChange','state','description'];
 }

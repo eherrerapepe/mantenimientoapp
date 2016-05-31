@@ -13,13 +13,19 @@
                             <img src="{{ asset('assets/img/user.png') }}" class="img-responsive img-circle">
                         </div>
                         <div class="col-xs-12 text-center white-color cnt-name-welcome">
-                            <p><strong>Edgar Herrera</strong></p>
+                            @foreach($userProfile as $user)
+                                <p><strong>{{ $user->nameUser }}</strong></p>
+                            @endforeach
                             <small>Bienvenido valvoline</small>
                         </div>
                     </div>
                 </div>
             </div>
             @include('partials/navPageIndex')
+            <input type="hidden" id="flagModal" value="{{ $flagModal }}">
+
+            @include('partials/modal')
+
         </div>
     </div>
 </div>

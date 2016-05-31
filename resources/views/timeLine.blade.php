@@ -1,27 +1,30 @@
 @extends('layout/master')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid" ng-controller="timeLineCtrl">
         <div class="row">
             @include('partials/redirectHomeUser')
             @include('partials/formSearchCar')
             <div class="col-xs-12">
-                <section id="cd-timeline" class="cd-container">
+                @if($flag != 0)
+                    <section id="cd-timeline" class="cd-container">
 
-                    <div class="cd-timeline-block">
-                        <div class="cd-timeline-img cd-picture">
-                            <i class="fa fa-car fa-2x" aria-hidden="true"></i>
-                        </div> <!-- cd-timeline-img -->
+                        <div class="cd-timeline-block" ng-repeat="car in listCar">
+                            <div class="cd-timeline-img cd-picture" ng-class="{'box-green': car.state == 1,'box-white': car.state == 0}">
+                                <i class="fa fa-car fa-2x" aria-hidden="true"></i>
+                            </div> <!-- cd-timeline-img -->
 
-                        <div class="cd-timeline-content">
-                            <h2>Chevrolet</h2>
-                            <p>Cambio de aceite realizado</p>
-                            <span class="cd-date">27 Junio 2016</span>
-                            <a href="#0" class="btn btn-primary">Modificar</a>
-                        </div> <!-- cd-timeline-content -->
-                    </div> <!-- cd-timeline-block -->
+                            <div class="cd-timeline-content">
+                                <h4 class="text-primary">@{{ car.dateChange }}</h4>
+                                <p>@{{ car.description }}</p>
+                                <a href="#" class="btn btn-primary">Modificar</a>
+                            </div> <!-- cd-timeline-content -->
+                        </div> <!-- cd-timeline-block -->
 
-                </section>
+                    </section>
+                @else
+                    <h4 class="text-center white-color">Automovil no registrado</h4>
+                @endif
             </div>
         </div>
     </div>

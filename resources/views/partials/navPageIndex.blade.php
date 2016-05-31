@@ -14,7 +14,7 @@
             </div>
 
             <div class="row cnt-nav-index">
-                <i class="fa fa-user" aria-hidden="true"></i><a href="#">PERFIL</a>
+                <i class="fa fa-user" aria-hidden="true"></i><a href="{{ route('userProfile') }}">PERFIL</a>
             </div>
         </div>
     </div>

@@ -36,9 +36,26 @@ Route::get('linea_de_tiempo',[
     'uses'  => 'TimeLineController@index',
     'as'    => 'timeLineIndex'
 ]);
+Route::get('listCar/{id}','TimeLineController@showDates');
 
 //HISTORI//////////////////////////////////////////////////////////////////
 Route::get('historial',[
     'uses' => 'TimeLineController@history',
     'as'    => 'historyIndex'
 ]);
+
+//PROFILE//////////////////////////////////////////////////////////////////
+Route::get('perfil_usuario',[
+    'uses'  => 'UserProfileController@profile',
+    'as'    => 'userProfile'
+]);
+Route::post('save_user',[
+    'uses'  => 'UserProfileController@store',
+    'as'    => 'saveUserProfile'
+]);
+Route::get('registrar_usuario',[
+    'uses'  => 'UserProfileController@forUserProfile',
+    'as'    => 'forUserProfile'
+]);
+Route::get('edit_user','UserProfileController@forUserEdit');
+Route::post('updateUserProfile','UserProfileController@updateUserProfile');
