@@ -1,9 +1,13 @@
-body{
+/*body{
     background: url("../img/background.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+*/
+body{
+    background-color: rgba(23,168,255,0.1);
 }
 
 .cnt-nav{
@@ -49,18 +53,12 @@ body{
     width: 260%;
 }
 
-.cnt-return-nav{
-    padding: 3% 0%;
-    background-color: #263238;
-    color: white;
-}
-
 .btn-plus{
     height: 50px;
     width: 50px;
     padding: 10px !important;
     color: white;
-    background-color: #ff6f00;
+    background-color: #ec323d;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -111,7 +109,7 @@ body{
 }
 
 .cnt-search{
-    background-color: rgba(0,0,0,0.5);
+    background-color: #A1A3A6;
 }
 
 .date-text-history{
@@ -136,4 +134,28 @@ body{
 
 .box-green{
     border: 3px solid greenyellow !important;
+}
+.nav-mantenimiento{
+    background-color: #004990 !important;
+}
+.navbar-brand{
+    color: white !important;
+}
+.navbar-nav li a{
+    color: white !important;
+}
+.navbar-nav li a:hover{
+    color: #004990 !important;
+}
+.icon-bar{
+    background-color: white !important;
+}
+.cnt-banner{
+    margin-top: -20px !important;
+    height: 20%;
+    overflow: hidden;
+}
+.img-banner{
+    margin-top: -20px !important;
+    width: 100%;
 }

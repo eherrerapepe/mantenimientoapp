@@ -25,14 +25,6 @@
                         <input type="text" class="form-control" id="dateChange" name="dateChange">
                         <small class="help-block">Fecha del ultimo cambio de aceite</small>
                     </div>
-                    <div class="form-group">
-                        <label for="photo_car">Foto:</label>
-                        <div class="cnt-file">
-                            <p id="texto-file">Seleccionar</p>
-                            <input type="file" id="photo_car" name="photo_car">
-                        </div>
-                        <small class="help-block">Este campo no es obligatorio</small>
-                    </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>

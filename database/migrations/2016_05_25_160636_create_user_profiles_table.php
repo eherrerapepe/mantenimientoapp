@@ -16,7 +16,6 @@ class CreateUserProfilesTable extends Migration
             $table->increments('id');
             $table->string('nameUser');
             $table->string('email')->unique();
-            $table->string('photoUser')->nullable();
             $table->timestamps();
         });
     }

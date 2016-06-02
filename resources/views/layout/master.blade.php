@@ -33,6 +33,7 @@
     <script src="{{ asset('assets/datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
     {{-- Angular client --}}
     <script src="{{ asset('assets/js/angCli.js') }}"></script>
+    @yield('styleBackground')
 
 </body>
 </html>

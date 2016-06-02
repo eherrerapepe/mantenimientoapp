@@ -13,52 +13,6 @@ use Illuminate\Support\Facades\Input;
 
 class UserProfileController extends Controller
 {
-    //Pantalla de inicio de la aplicacion
-    public function index(Request $request)
-    {
-        if($request->session()->has('user')){
-            //Consulto la base de datos para verificar si el usuario
-            //Se encuentra registrado en la base de datos
-            $userRegister = UserProfile::where('email','=',$request->session()->get('user'))->get();
-            if (count($userRegister) > 0){
-                $flagModal = 1;
-            }else{
-                $request->session()->flush();
-                $flagModal = 0;
-            }
-        }else{
-            $flagModal = 0;
-        }
-
-        $userRegister = UserProfile::where('email','=',$request->session()->get('user'))->get();
-
-        if(count($userRegister)<0){
-            $userRegister['nameUser'] = 'User Valvoline';
-        }
-
-        //Consultamos y lanzamos las alertas
-        $dataTime = TimeLine::select('dateChange','state','car_id')->get();
-        $dataAlerts = [];
-        $now = Carbon::now();
-        $i = 0;
-
-        foreach ($dataTime as $time)
-        {
-            $dateChange = new Carbon($time->dateChange);
-            if ($dateChange->subDay(7) <= $now && $time->state == 0)
-            {
-                $dataAlerts[$i] = [
-                    'car_id' => $time->car_id,
-                    'dateChange' => $time->dateChange
-                ];
-                $i++;
-            }
-        }
-
-        //dd($dataAlerts,$i);
-
-        return view('index',['flagModal'=>$flagModal,'userProfile'=>$userRegister]);
-    }
     //Pantalla para el index de profile
     public function profile(Request $request)
     {
@@ -72,19 +26,6 @@ class UserProfileController extends Controller
     public function store(Request $request)
     {
         $dataUser = $request->all();
-        //Subimos la imagen del automovil si existe
-        if(Input::hasFile('photoUser')){
-            //Obtenemos el campo file_1 definido en el formulario
-            $photoUser = $request->file('photoUser');
-            //Obtenemos el nombre del archivo
-            $namePhoto = $photoUser->getClientOriginalName();
-            //Indicamos donde se guardara la foto
-            $photoUser->move('storage',$namePhoto);
-            $dataUser['photoUser'] = $namePhoto;
-        }else{
-            $dataUser['photoUser'] = 'user.png';
-        }
-
         //Registramos el usuario del nuevo usuario
         UserProfile::create($dataUser);
         //Creamos la session del nuevo usuario

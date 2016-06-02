@@ -10,13 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*
 Route::get('/',[
     'uses'  => 'UserProfileController@index',
     'as'    => 'homeUser'
 ]);
+*/
 
-Route::get('autos_registrados',[
+Route::get('/',[
     'uses'  => 'CarController@index',
     'as'    => 'registerCarIndex'
 ]);

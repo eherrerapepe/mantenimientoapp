@@ -21,4 +21,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="flagModal" value="{{ $flagModal }}">
+
+    @include('partials/modal')
 @endsection

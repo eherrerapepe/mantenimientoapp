@@ -24,12 +24,56 @@ class CarController extends Controller
             break;
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        if($request->session()->has('user')){
+            //Consulto la base de datos para verificar si el usuario
+            //Se encuentra registrado en la base de datos
+            $userRegister = UserProfile::where('email','=',$request->session()->get('user'))->get();
+            if (count($userRegister) > 0){
+                $flagModal = 1;
+            }else{
+                $request->session()->flush();
+                $flagModal = 0;
+            }
+        }else{
+            $flagModal = 0;
+        }
+
+        $userRegister = UserProfile::where('email','=',$request->session()->get('user'))->get();
+
+        if(count($userRegister)<0){
+            $userRegister['nameUser'] = 'User Valvoline';
+        }
+
+        //Consultamos y lanzamos las alertas
+        $dataTime = TimeLine::select('dateChange','state','car_id')->get();
+        $dataAlerts = [];
+        $now = Carbon::now();
+        $i = 0;
+
+        foreach ($dataTime as $time)
+        {
+            $dateChange = new Carbon($time->dateChange);
+            if ($dateChange->subDay(7) <= $now && $time->state == 0)
+            {
+                $dataAlerts[$i] = [
+                    'car_id' => $time->car_id,
+                    'dateChange' => $time->dateChange
+                ];
+                $i++;
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
         if (count($userId) > 0){
             $dataCar = Car::where('user_profile_id',$idUser->id)->get();
 
-            return view('registerCar',['cars'=>$dataCar]);
+            return view('registerCar',['cars'=>$dataCar,'flagModal'=>$flagModal,'registerCar'=>$userRegister]);
         }else{
-            return view('registerCar',['cars'=>1]);
+            return view('registerCar',['cars'=>1,'flagModal'=>$flagModal,'registerCar'=>$userRegister]);
         }
 
     }
@@ -75,17 +119,6 @@ class CarController extends Controller
 
         $dataCar['user_profile_id'] = $idUser->id;
 
-        //Subimos la imagen del automovil si existe
-        if(Input::hasFile('photo_car')){
-            //Obtenemos el campo file_1 definido en el formulario
-            $photoCar = $request->file('photo_car');
-            //Obtenemos el nombre del archivo
-            $namePhoto = $photoCar->getClientOriginalName();
-            //Indicamos donde se guardara la foto
-            $photoCar->move('storage',$namePhoto);
-            $dataCar['photo_car'] = $namePhoto;
-        }
-
         //Registramos el nuevo automovil
         $carRegister = Car::create($dataCar);
 
@@ -114,6 +147,6 @@ class CarController extends Controller
             $dataTimeLine['dateChange'] = $newDateChange;
         }
 
-        return redirect()->route('homeUser');
+        return redirect()->route('registerCarIndex');
     }
 }

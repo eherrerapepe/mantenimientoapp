@@ -16,7 +16,6 @@ class CreateCarsTable extends Migration
             $table->increments('id');
             $table->string('model');
             $table->string('km_actual');
-            $table->string('photo_car')->nullable();
             $table->string('approximate_travel_day');
             $table->integer('user_profile_id')->unsigned();
             $table->foreign('user_profile_id')->references('id')->on('user_profiles');
