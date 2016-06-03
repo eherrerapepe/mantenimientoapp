@@ -8,7 +8,7 @@
             @if(count($userProfile)>0)
                 @foreach($userProfile as $user)
                     <div class="col-xs-12 center-img img-user-profile">
-                        <img src="storage/{{ $user->photoUser }}" class="img-responsive img-circle">
+                        <img src="storage/user.png" class="img-responsive img-circle">
                     </div>
                     <div class="cnt-dates-user">
                         <div class="col xs 12 text-center">
