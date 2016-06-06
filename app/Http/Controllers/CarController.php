@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Input;
 
 class CarController extends Controller
@@ -17,6 +18,12 @@ class CarController extends Controller
     //Pagina inical para visualizar los automoviles registrados
     public function index(Request $request)
     {
+        //Creamos la cookie quien mantendra los datos del usuario
+        setcookie('user','eherrerapepe@gmail.com',time() + 409838);
+
+        dd('hola cookie');
+
+
         //Obtenemos el id del usuario mediante la session iniciada
         $userId = UserProfile::select('id')->where('email','=',$request->session()->get('user'))->get();
         foreach ($userId as $id){
@@ -45,6 +52,7 @@ class CarController extends Controller
             $userRegister['nameUser'] = 'User Valvoline';
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         //Consultamos y lanzamos las alertas
         $dataTime = TimeLine::select('dateChange','state','car_id')->get();
         $dataAlerts = [];

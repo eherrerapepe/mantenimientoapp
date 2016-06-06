@@ -27,9 +27,9 @@ class UserProfileController extends Controller
     {
         $dataUser = $request->all();
         //Registramos el usuario del nuevo usuario
-        UserProfile::create($dataUser);
-        //Creamos la session del nuevo usuario
-        $request->session()->put('user', $dataUser['email']);
+        $userRegister = UserProfile::create($dataUser);
+        //Creamos la cookie quien mantendra los datos del usuario
+        setcookie('user',$userRegister->email);
 
         //Retornamos la vista al index
         return redirect()->route('registerCarIndex');
