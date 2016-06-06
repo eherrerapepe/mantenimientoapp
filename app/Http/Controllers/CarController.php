@@ -18,41 +18,7 @@ class CarController extends Controller
     //Pagina inical para visualizar los automoviles registrados
     public function index(Request $request)
     {
-        //Creamos la cookie quien mantendra los datos del usuario
-        setcookie('user','eherrerapepe@gmail.com',time() + 409838);
-
-        dd('hola cookie');
-
-
-        //Obtenemos el id del usuario mediante la session iniciada
-        $userId = UserProfile::select('id')->where('email','=',$request->session()->get('user'))->get();
-        foreach ($userId as $id){
-            $idUser = $id;
-            break;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        if($request->session()->has('user')){
-            //Consulto la base de datos para verificar si el usuario
-            //Se encuentra registrado en la base de datos
-            $userRegister = UserProfile::where('email','=',$request->session()->get('user'))->get();
-            if (count($userRegister) > 0){
-                $flagModal = 1;
-            }else{
-                $request->session()->flush();
-                $flagModal = 0;
-            }
-        }else{
-            $flagModal = 0;
-        }
-
-        $userRegister = UserProfile::where('email','=',$request->session()->get('user'))->get();
-
-        if(count($userRegister)<0){
-            $userRegister['nameUser'] = 'User Valvoline';
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /*///////////////////////////////////////////////////////////////////////////////////////////////////
         //Consultamos y lanzamos las alertas
         $dataTime = TimeLine::select('dateChange','state','car_id')->get();
         $dataAlerts = [];
@@ -71,17 +37,25 @@ class CarController extends Controller
                 $i++;
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+        //Verificamos la existencia del usuario mediante la cookie
+        if (isset($_COOKIE['user']))
+        {
+            //Consultamos los datos del usuario en la base de datos
+            $dataUser = UserProfile::where('email',$_COOKIE['user'])->get();
+            //Consultamos los autos registrados por el usuario
+            $dataCars = Car::where('user_profile_id',$dataUser[0]['id'])->get();
+            //Indicamos que el usuario se encuentra registrado
+            $flagModal = 1;
+            //Enviamos  a la vista los datos de los automoviles registrados por el usuario
+            return view('registerCar',['cars'=>$dataCars,'flagModal'=>$flagModal]);
 
-
-
-        if (count($userId) > 0){
-            $dataCar = Car::where('user_profile_id',$idUser->id)->get();
-
-            return view('registerCar',['cars'=>$dataCar,'flagModal'=>$flagModal,'registerCar'=>$userRegister]);
-        }else{
-            return view('registerCar',['cars'=>1,'flagModal'=>$flagModal,'registerCar'=>$userRegister]);
+        }else {
+            //Creamos la variable de la bandera para lanzar la ventana modal
+            $flagModal  = 0;
+            $flagCars   = 0;
+            return view('registerCar',['cars'=>$flagCars,'flagModal'=>$flagModal]);
         }
 
     }
@@ -100,8 +74,8 @@ class CarController extends Controller
         //Eliminamos el valor del array
         unset($dataCar['dateChange']);
 
-        //Obtenemos el id del usuario mediante la session iniciada
-        $countUser = UserProfile::select('id')->where('email','=',$request->session()->get('user'))->get();
+        //Obtenemos el id del usuario mediante la cookie
+        $countUser = UserProfile::select('id')->where('email',$_COOKIE['user'])->get();
 
         if(count($countUser)<=0){
             $email = date("YmdHis").'@mvalvoline.com';
@@ -112,20 +86,11 @@ class CarController extends Controller
             $dataUser['photoUser'] = 'user.png';
             //Registramos al usuario
             UserProfile::create($dataUser);
-            //Obtenemos el id del usuario que acabamos de registrar
-            $userId = UserProfile::select('id')->where('email','=',$email)->get();
-            //Creamos la session del nuevo usuario
-            $request->session()->put('user', $email);
-        }else{
-            $userId = UserProfile::select('id')->where('email','=',$request->session()->get('user'))->get();
+            //Creamos la cookie con el nuevo usuario
+            setcookie('user',$email);
         }
 
-        foreach ($userId as $id){
-            $idUser = $id;
-            break;
-        }
-
-        $dataCar['user_profile_id'] = $idUser->id;
+        $dataCar['user_profile_id'] = $countUser[0]['id'];
 
         //Registramos el nuevo automovil
         $carRegister = Car::create($dataCar);
@@ -139,10 +104,10 @@ class CarController extends Controller
             //A la fecha del ultimo cambio le sumamos los dias y obtenemos la nueva fecha
             $dateAct = new Carbon($dataTimeLine['dateChange']);
             if($dateAct < $now){
-                $dataTimeLine['description'] = 'El mantenimiento se realizo con exito en la fecha: ';
+                $dataTimeLine['description'] = 'El mantenimiento se realizo con exito a la fecha.';
                 $dataTimeLine['state'] = true;
             }else{
-                $dataTimeLine['description'] = 'El mantenimiento se debe realizar aproximadamente en la fecha: ';
+                $dataTimeLine['description'] = 'El mantenimiento se debe realizar aproximadamente a la fecha. ';
                 $dataTimeLine['state'] = false;
             }
             //Registramos el Time Line

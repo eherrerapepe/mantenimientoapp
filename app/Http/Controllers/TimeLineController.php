@@ -15,16 +15,11 @@ class TimeLineController extends Controller
     public function index(Request $request)
     {
         //Obtenemos el id del usuario mediante la session iniciada
-        $userId = UserProfile::select('id')->where('email','=',$request->session()->get('user'))->get();
+        $userId = UserProfile::select('id')->where('email','=',$_COOKIE['user'])->get();
 
         if (count($userId) > 0)
         {
-            foreach ($userId as $id){
-                $idUser = $id;
-                break;
-            }
-
-            $dataCar = Car::where('user_profile_id',$idUser->id)->get();
+            $dataCar = Car::where('user_profile_id',$userId[0]['id'])->get();
 
             return view('timeLine',['cars'=>$dataCar,'flag'=>1]);
         }else{
@@ -36,15 +31,11 @@ class TimeLineController extends Controller
     public function history(Request $request)
     {
         //Obtenemos el id del usuario mediante la session iniciada
-        $userId = UserProfile::select('id')->where('email','=',$request->session()->get('user'))->get();
+        $userId = UserProfile::select('id')->where('email',$_COOKIE['user'])->get();
         if (count($userId) > 0)
         {
-            foreach ($userId as $id){
-                $idUser = $id;
-                break;
-            }
 
-            $dataCar = Car::where('user_profile_id',$idUser->id)->get();
+            $dataCar = Car::where('user_profile_id',$userId[0]['id'])->get();
             return view('history',['cars'=>$dataCar,'flag'=>1]);
         }else{
             return view('history',['flag'=>0]);
@@ -54,7 +45,7 @@ class TimeLineController extends Controller
     //Consultamos el historial del automivil pasado como parametro
     public function showDates($id){
         $dataCar = TimeLine::where('car_id',$id)->get();
-
+        
         return json_encode($dataCar);
 
     }

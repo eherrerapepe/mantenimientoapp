@@ -7,7 +7,7 @@
 
             <div class="col-xs-12 text-center">
                 <ul class="list-group">
-                    @if($cars !== 1)
+                    @if($flagModal === 1)
                         @foreach($cars as $car)
                             <li class="list-group-item"><i class="fa fa-car fa-3x" aria-hidden="true"></i> <strong class="text-primary text-list-car">{{ $car->model }}</strong></li>
                         @endforeach
